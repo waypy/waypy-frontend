@@ -92,8 +92,4 @@ export default {
   font-size: 0.6em;
   margin-top: 1em;
 }
-
-.-user .timestamp {
-  float: initial;
-}
 </style>
