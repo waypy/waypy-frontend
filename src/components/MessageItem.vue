@@ -1,7 +1,8 @@
 <template>
 <div class="message">
   <div class="bubble" :class="[{ '-user': message.user }, `-${appMode}` ]">
-    <div class="content">{{ message.message }}</div>
+    <div class="content" v-if="message.user">{{ message.message }}</div>
+    <div class="content" v-html="message.message" v-else></div>
     <div class="timestamp">{{ format(message.timestamp) }}</div>
   </div>
 </div>
@@ -10,6 +11,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import format from 'date-fns/format'
+import isToday from 'date-fns/is_today'
 
 export default {
   props: {
@@ -23,13 +25,18 @@ export default {
   },
 
   methods: {
-    format: (date) => format(date, 'DD MMM HH:mm')
+    format (date) {
+      return format(
+        date,
+        `${isToday(date) ? '' : 'DD MMM '}HH:mm`
+      )
+    }
   },
 }
 </script>
 
 <style scoped>
-.message {
+.message + .message {
   margin-top: 1em;
 }
 
@@ -41,11 +48,11 @@ export default {
 
 .bubble {
   background: white;
-  border-radius: 4px 4px 4px 0;
+  border-radius: 6px 6px 6px 0;
   box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.05);
   display: inline-block;
   max-width: 80%;
-  padding: 0.5em;
+  padding: 0.5em 0.75em;
   position: relative;
 }
 
@@ -70,7 +77,7 @@ export default {
 
 .-user {
   background: #394492;
-  border-radius: 4px 4px 0 4px;
+  border-radius: 6px 6px 0 6px;
   color: white;
   float: right;
   margin-left: auto;

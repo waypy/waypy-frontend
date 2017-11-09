@@ -64,6 +64,12 @@ header {
   z-index: 1;
 }
 
+@media screen and (min-width: 641px) {
+  header {
+    border-radius: 0 0 6px 6px;
+  }
+}
+
 span {
   display: block;
   font-size: 20px;
