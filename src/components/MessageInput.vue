@@ -73,12 +73,6 @@ export default {
             { timestamp }
           )
         )
-        // this.addMessage(
-        //   Object.assign(
-        //     this.clone(this.message),
-        //     { timestamp, user: false }
-        //   )
-        // )
         this.message.message = ''
         this.$root.$emit('scroll-to-bottom')
         this.resetHeight()
@@ -108,6 +102,12 @@ footer {
   position: fixed;
   transform: translateX(-50%);
   width: 100%;
+}
+
+@media screen and (min-width: 641px) {
+  footer {
+    border-radius: 6px 6px 0 0;
+  }
 }
 
 textarea {

@@ -5,8 +5,7 @@
     </app-header>
     <messages></messages>
   </main>
-  <message-input @height-change="onHeightChange">
-  </message-input>
+  <message-input @height-change="onHeightChange"></message-input>
 </div>
 </template>
 
@@ -79,6 +78,10 @@ body {
 
 a {
   cursor: pointer;
+}
+
+img {
+  max-width: 100%;
 }
 
 #app {
