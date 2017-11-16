@@ -3,7 +3,8 @@
   <small class="date" :class="[ `-${appMode}` ]">{{ parsedDate }}</small>
   <message-item
     v-for="(message, i) of date.messages"
-    :message="message">
+    :message="message"
+    :key="i">
   </message-item>
 </div>
 </template>
