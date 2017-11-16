@@ -9,6 +9,10 @@ Vue.use(Vuex)
 
 const state = {
   appMode: 'dark',
+  location: {
+    lat: null,
+    lng: null,
+  },
   messages: [],
 }
 

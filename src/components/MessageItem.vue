@@ -26,17 +26,14 @@ export default {
 
   methods: {
     format (date) {
-      return format(
-        date,
-        `${isToday(date) ? '' : 'DD MMM '}HH:mm`
-      )
+      return format(date, 'HH:mm')
     }
   },
 }
 </script>
 
 <style scoped>
-.message + .message {
+.message {
   margin-top: 1em;
 }
 
@@ -54,6 +51,7 @@ export default {
   max-width: 80%;
   padding: 0.5em 0.75em;
   position: relative;
+  align-self: flex-start;
 }
 
 .bubble::after {
@@ -80,7 +78,7 @@ export default {
   border-radius: 6px 6px 0 6px;
   color: white;
   float: right;
-  margin-left: auto;
+  align-self: flex-end;
 }
 
 .-user::after {

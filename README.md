@@ -22,4 +22,5 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 
 ## TODO
 
-- [ ] Location Permission Request
+- [x] Location Permission Request
+- [ ] Time and date word. Example: Today, Minutes ago, Hours ago, etc
