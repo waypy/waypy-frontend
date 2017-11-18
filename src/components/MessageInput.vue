@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import SendIcon from './SendIcon'
 
 export default {
@@ -34,12 +34,6 @@ export default {
         message: '',
       },
     }
-  },
-
-  computed: {
-    ...mapGetters([
-      'appMode',
-    ]),
   },
 
   watch: {

@@ -1,6 +1,6 @@
 <template>
 <div class="message">
-  <div class="bubble" :class="[{ '-user': message.user }, `-${appMode}` ]">
+  <div class="bubble" :class="[{ '-user': message.user }]">
     <div class="content" v-if="message.user">{{ message.message }}</div>
     <div class="content" v-html="message.message" v-else></div>
     <div class="timestamp">{{ format(message.timestamp) }}</div>
@@ -16,12 +16,6 @@ import isToday from 'date-fns/is_today'
 export default {
   props: {
     message: Object
-  },
-
-  computed: {
-    ...mapGetters([
-      'appMode',
-    ]),
   },
 
   methods: {
@@ -65,11 +59,11 @@ export default {
   border-style: solid;
 }
 
-.-dark {
+.-dark .bubble:not(.-user) {
   background: #2f2f40;
 }
 
-.-dark::after {
+.-dark .bubble:not(.-user)::after {
   border-color: transparent #2f2f40 #2f2f40 transparent;
 }
 

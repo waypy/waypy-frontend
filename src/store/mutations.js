@@ -2,6 +2,9 @@ export default {
   SWITCH_APP_MODE (state) {
     state.appMode = state.appMode === 'normal' ? 'dark' : 'normal'
   },
+  SWITCH_HELP (state, value) {
+    state.helpShown = value
+  },
   SET_LOCATION (state, location) {
     state.location = location
   },
