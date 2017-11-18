@@ -2,6 +2,9 @@
 <header>
   <span>Waypy</span>
   <div class="change-mode">
+    <a @click="() => { faq = true }" title="Bantuan">
+      <help-icon></help-icon>
+    </a>
     <a @click="switchAppMode" title="Ubah Warna Tampilan">
       <moon-icon v-show="appMode === 'normal'"></moon-icon>
       <sun-icon v-show="appMode === 'dark'"></sun-icon>
@@ -12,11 +15,13 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import HelpIcon from './HelpIcon'
 import MoonIcon from './MoonIcon'
 import SunIcon from './SunIcon'
 
 export default {
   components: {
+    HelpIcon,
     MoonIcon,
     SunIcon,
   },
@@ -31,6 +36,7 @@ export default {
           background: 'white'
         }
       },
+      faq: false
     }
   },
 
@@ -62,6 +68,10 @@ header {
   padding: 0 1em;
   user-select: none;
   z-index: 1;
+}
+
+a {
+  margin-left: 0.5em;
 }
 
 @media screen and (min-width: 641px) {

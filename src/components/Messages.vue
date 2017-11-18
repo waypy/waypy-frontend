@@ -3,20 +3,21 @@
   class="container"
   ref="view"
   :style="containerStyle">
-  <message-item
-    v-for="(message, i) of messages" :key="i"
-    :message="message">
-  </message-item>
+  <date-messages
+    v-for="(date, i) of messages"
+    :date="date"
+    :key="i">
+  </date-messages>
 </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import MessageItem from './MessageItem'
+import DateMessages from './DateMessages'
 
 export default {
   components: {
-    MessageItem,
+    DateMessages,
   },
 
   data () {

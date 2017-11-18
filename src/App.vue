@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import AppHeader from './components/AppHeader'
 import MessageInput from './components/MessageInput'
 import Messages from './components/Messages'
@@ -39,6 +39,10 @@ export default {
         }
       },
       mainStyle: null,
+      location: {
+        denied: false,
+        unsupported: false,
+      },
     }
   },
 
@@ -51,6 +55,10 @@ export default {
     ])
   },
 
+  mounted () {
+    this.getLocation()
+  },
+
   methods: {
     changeMode (mode) {
       this.mode = mode
@@ -60,6 +68,29 @@ export default {
         paddingBottom: height
       }
     },
+    getLocation () {
+      if ('geolocation' in navigator) {
+        try {
+          navigator.geolocation.watchPosition(({ coords }) => {
+            this.setLocation({
+              lat: coords.latitude,
+              lng: coords.longitude,
+            })
+          }, (error) => {
+            console.error(error)
+          })
+        } catch (error) {
+          if (error.PERMISSION_DENIED) {
+            this.location.denied = true
+          }
+        }
+      } else {
+        this.location.unsupported = true
+      }
+    },
+    ...mapActions([
+      'setLocation'
+    ]),
   }
 }
 </script>
