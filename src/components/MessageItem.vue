@@ -11,7 +11,9 @@
 <script>
 import { mapGetters } from 'vuex'
 import format from 'date-fns/format'
-import isToday from 'date-fns/is_today'
+import isThisHour from 'date-fns/is_this_hour'
+import isThisMinute from 'date-fns/is_this_minute'
+import differenceInMinutes from 'date-fns/difference_in_minutes'
 
 export default {
   props: {
@@ -20,8 +22,16 @@ export default {
 
   methods: {
     format (date) {
+      if (isThisHour(date)) {
+        if (isThisMinute(date)) {
+          return 'Baru saja'
+        }
+
+        return `${differenceInMinutes(new Date, date)} menit yang lalu`
+      }
+
       return format(date, 'HH:mm')
-    }
+    },
   },
 }
 </script>

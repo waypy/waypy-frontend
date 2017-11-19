@@ -55,7 +55,6 @@ export default {
       if (e.keyCode !== 13) {
         this.inputEl.style.height = this.inputEl.scrollHeight + 'px'
         this.containerHeight = this.$refs.footer.clientHeight
-        this.$root.$emit('scroll-to-bottom')
       }
     },
     send () {

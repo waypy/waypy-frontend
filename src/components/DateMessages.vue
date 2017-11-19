@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import isToday from 'date-fns/is_today'
+import isYesterday from 'date-fns/is_yesterday'
 import MessageItem from './MessageItem'
 
 export default {
@@ -33,6 +35,14 @@ export default {
   computed: {
     parsedDate () {
       let date = this.date.date.split(' ')
+      let dateObj = new Date(date[2], date[1] - 1, date[0])
+
+      if (isToday(dateObj)) {
+        return 'Hari Ini'
+      } else if (isYesterday(dateObj)) {
+        return 'Kemarin'
+      }
+
       return `${date[0]} ${this.monthNames[date[1] - 1]} ${date[2]}`
     },
   },
