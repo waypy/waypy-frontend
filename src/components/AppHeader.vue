@@ -2,7 +2,7 @@
 <header>
   <span>Waypy</span>
   <div class="change-mode">
-    <a @click="() => { faq = true }" title="Bantuan">
+    <a @click="switchHelp(!helpShown)" title="Bantuan">
       <help-icon></help-icon>
     </a>
     <a @click="switchAppMode" title="Ubah Warna Tampilan">
@@ -26,32 +26,17 @@ export default {
     SunIcon,
   },
 
-  data () {
-    return {
-      styles: {
-        dark: {
-          background: 'transparent'
-        },
-        normal: {
-          background: 'white'
-        }
-      },
-      faq: false
-    }
-  },
-
   computed: {
-    headerStyle () {
-      return this.styles[this.appMode]
-    },
     ...mapGetters([
       'appMode',
+      'helpShown',
     ]),
   },
 
   methods: {
     ...mapActions([
       'switchAppMode',
+      'switchHelp',
     ]),
   }
 }

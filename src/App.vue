@@ -1,43 +1,37 @@
 <template>
-<div id="app" :style="appStyle">
+<div
+  id="app"
+  :class="[ `-${appMode}` ]">
   <main :style="mainStyle">
-    <app-header @change="changeMode">
-    </app-header>
+    <app-header></app-header>
     <messages></messages>
   </main>
   <message-input @height-change="onHeightChange"></message-input>
+  <modal></modal>
 </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import AppHeader from './components/AppHeader'
-import MessageInput from './components/MessageInput'
 import Messages from './components/Messages'
+import MessageInput from './components/MessageInput'
+import Modal from './components/Modal'
 import MoonIcon from './components/MoonIcon'
 import SunIcon from './components/SunIcon'
 
 export default {
   components: {
     AppHeader,
-    MessageInput,
     Messages,
+    MessageInput,
+    Modal,
     MoonIcon,
     SunIcon,
   },
 
   data () {
     return {
-      styles: {
-        dark: {
-          background: '#000022',
-          color: 'white'
-        },
-        normal: {
-          background: '#ececfc',
-          color: '#444466'
-        }
-      },
       mainStyle: null,
       location: {
         denied: false,
@@ -47,9 +41,6 @@ export default {
   },
 
   computed: {
-    appStyle () {
-      return this.styles[this.appMode]
-    },
     ...mapGetters([
       'appMode',
     ])
@@ -122,6 +113,16 @@ img {
   width: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#app.-normal {
+  background: #ececfc;
+  color: #444466;
+}
+
+#app.-dark {
+  background: #000022;
+  color: white;
 }
 
 main {

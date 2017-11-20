@@ -1,8 +1,7 @@
 <template>
 <div
   class="container"
-  ref="view"
-  :style="containerStyle">
+  ref="view">
   <date-messages
     v-for="(date, i) of messages"
     :date="date"
@@ -20,25 +19,8 @@ export default {
     DateMessages,
   },
 
-  data () {
-    return {
-      styles: {
-        dark: {
-          background: 'transparent',
-        },
-        normal: {
-          background: '#ececfc',
-        },
-      },
-    }
-  },
-
   computed: {
-    containerStyle () {
-      return this.styles[this.appMode]
-    },
     ...mapGetters([
-      'appMode',
       'messages',
     ]),
   },
@@ -61,9 +43,14 @@ export default {
 
 <style scoped>
 .container {
+  background: #ececfc;
   flex: 1 1 100px;
   overflow-x: hidden;
   overflow-y: auto;
   padding: 1em;
+}
+
+.-dark .container {
+  background: transparent;
 }
 </style>

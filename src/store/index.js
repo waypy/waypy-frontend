@@ -9,6 +9,7 @@ Vue.use(Vuex)
 
 const state = {
   appMode: 'dark',
+  helpShown: false,
   location: {
     lat: null,
     lng: null,

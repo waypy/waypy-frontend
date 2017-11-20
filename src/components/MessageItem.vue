@@ -1,6 +1,6 @@
 <template>
 <div class="message">
-  <div class="bubble" :class="[{ '-user': message.user }, `-${appMode}` ]">
+  <div class="bubble" :class="[{ '-user': message.user }]">
     <div class="content" v-if="message.user">{{ message.message }}</div>
     <div class="content" v-html="message.message" v-else></div>
     <div class="timestamp">{{ format(message.timestamp) }}</div>
@@ -11,23 +11,27 @@
 <script>
 import { mapGetters } from 'vuex'
 import format from 'date-fns/format'
-import isToday from 'date-fns/is_today'
+import isThisHour from 'date-fns/is_this_hour'
+import isThisMinute from 'date-fns/is_this_minute'
+import differenceInMinutes from 'date-fns/difference_in_minutes'
 
 export default {
   props: {
     message: Object
   },
 
-  computed: {
-    ...mapGetters([
-      'appMode',
-    ]),
-  },
-
   methods: {
     format (date) {
+      if (isThisHour(date)) {
+        if (isThisMinute(date)) {
+          return 'Baru saja'
+        }
+
+        return `${differenceInMinutes(new Date, date)} menit yang lalu`
+      }
+
       return format(date, 'HH:mm')
-    }
+    },
   },
 }
 </script>
@@ -65,11 +69,11 @@ export default {
   border-style: solid;
 }
 
-.-dark {
+.-dark .bubble:not(.-user) {
   background: #2f2f40;
 }
 
-.-dark::after {
+.-dark .bubble:not(.-user)::after {
   border-color: transparent #2f2f40 #2f2f40 transparent;
 }
 

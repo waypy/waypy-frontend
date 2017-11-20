@@ -1,6 +1,6 @@
 <template>
-<div>
-  <small class="date" :class="[ `-${appMode}` ]">{{ parsedDate }}</small>
+<div class="date-container">
+  <small class="date">{{ parsedDate }}</small>
   <message-item
     v-for="(message, i) of date.messages"
     :message="message"
@@ -10,7 +10,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import isToday from 'date-fns/is_today'
+import isYesterday from 'date-fns/is_yesterday'
 import MessageItem from './MessageItem'
 
 export default {
@@ -34,19 +35,28 @@ export default {
   computed: {
     parsedDate () {
       let date = this.date.date.split(' ')
+      let dateObj = new Date(date[2], date[1] - 1, date[0])
+
+      if (isToday(dateObj)) {
+        return 'Hari Ini'
+      } else if (isYesterday(dateObj)) {
+        return 'Kemarin'
+      }
+
       return `${date[0]} ${this.monthNames[date[1] - 1]} ${date[2]}`
     },
-    ...mapGetters([
-      'appMode',
-    ]),
   },
 }
 </script>
 
 <style scoped>
-div {
+.date-container {
   display: flex;
   flex-direction: column;
+}
+
+.date-container + .date-container {
+  margin-top: 1em;
 }
 
 .date {
@@ -57,7 +67,7 @@ div {
   padding: 0.25em 0.5em;
 }
 
-.-dark {
+.-dark .date {
   background: #2f2f40;
 }
 </style>

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import SendIcon from './SendIcon'
 
 export default {
@@ -34,12 +34,6 @@ export default {
         message: '',
       },
     }
-  },
-
-  computed: {
-    ...mapGetters([
-      'appMode',
-    ]),
   },
 
   watch: {
@@ -61,7 +55,6 @@ export default {
       if (e.keyCode !== 13) {
         this.inputEl.style.height = this.inputEl.scrollHeight + 'px'
         this.containerHeight = this.$refs.footer.clientHeight
-        this.$root.$emit('scroll-to-bottom')
       }
     },
     send () {
