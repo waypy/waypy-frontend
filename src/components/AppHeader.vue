@@ -1,7 +1,10 @@
 <template>
 <header>
   <span>Waypy</span>
-  <div class="change-mode">
+  <div class="links">
+    <a href="https://github.com/waypy/waypy-frontend" title="Github Repo">
+      <github-icon></github-icon>
+    </a>
     <a @click="switchHelp(!helpShown)" title="Bantuan">
       <help-icon></help-icon>
     </a>
@@ -15,12 +18,14 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import GithubIcon from './GithubIcon'
 import HelpIcon from './HelpIcon'
 import MoonIcon from './MoonIcon'
 import SunIcon from './SunIcon'
 
 export default {
   components: {
+    GithubIcon,
     HelpIcon,
     MoonIcon,
     SunIcon,
@@ -56,6 +61,7 @@ header {
 }
 
 a {
+  color: inherit;
   margin-left: 0.5em;
 }
 
@@ -71,7 +77,7 @@ span {
   letter-spacing: .02em;
 }
 
-.change-mode {
+.links {
   margin-left: auto;
 }
 
