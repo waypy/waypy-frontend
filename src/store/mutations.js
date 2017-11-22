@@ -14,27 +14,17 @@ export default {
     const year = message.timestamp.getFullYear()
     const fullDate = `${date} ${month} ${year}`
 
-    if (state.messages.length) {
-      state.messages
-        .map((date) => {
-          if (date.date === fullDate) {
-            state.messages
-              .filter((date) => date.date === fullDate)[0].messages
-              .push(message)
-          } else {
-            pushDateMessage(state, message, fullDate)
-          }
-        })
+    let today = state.messages
+      .filter((date) => date.date === fullDate)[0]
+
+    if (today) {
+      today.messages.push(message)
     } else {
-      pushDateMessage(state, message, fullDate)
+      state.messages
+        .push({
+          date: fullDate,
+          messages: [ message ]
+        })
     }
   },
-}
-
-function pushDateMessage (state, message, fullDate) {
-  state.messages
-    .push({
-      date: fullDate,
-      messages: [ message ]
-    })
 }
